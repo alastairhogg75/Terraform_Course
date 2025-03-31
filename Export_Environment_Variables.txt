@@ -1,0 +1,44 @@
+AWS Config
+
+export AWS_ACCESS_KEY_ID="test" 
+export AWS_SECRET_ACCESS_KEY="test"
+export AWS_DEFAULT_REGION="us-east-1"
+
+AWS CLI
+
+export AWS_ENDPOINT_URL=http://localhost:4566
+
+LOCALSTACKS – setting environment variables
+
+export TF_VAR_aws_endpoint=http://localhost:4566
+export TF_VAR_aws_s3_endpoint=http://s3.localhost.localstack.cloud:4566
+
+env | grep -I aws
+printenv
+
+****Need the following in "provider.tf" file depending on resources creating****
+provider "aws" {
+  endpoints {
+    sts = var.aws_endpoint
+    ec2 = var.aws_endpoint
+    s3  = var.aws_s3_endpoint
+    rds = var.aws_endpoint
+
+    ##s3  = "http://s3.localhost.localstack.cloud:4566"
+    ##sts = "http://localhost:4566"
+    ##ec2 = "http://localhost:4566"
+
+  }
+}
+
+****"variable.tf" file****
+variable "aws_endpoint" {
+  type = string
+  description = "AWS endpoint for LocalStack"
+}
+
+variable "aws_s3_endpoint" {
+  type = string
+  description = "AWS endpoint for LocalStack"
+}
+
