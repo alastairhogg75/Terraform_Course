@@ -1,0 +1,35 @@
+data "aws_availability_zones" "available" {}
+
+data "aws_ami" "latest-ubuntu" {
+    most_recent = true
+    owners = ["099720109477"]
+    
+    filter {
+        name    = "name"
+        values  = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*"]
+    }
+
+    filter  {
+        name    = "virtualization-type"
+        values  = ["hvm"]
+    }
+}   
+
+resource "aws_instance" "MyFirstInstance"{
+    ami                 = data.aws_ami.latest-ubuntu.id
+    instance_type       = "t2.micro"
+    availability_zone   = data.aws_availability_zones.available.names[1]
+    
+    tags = {
+        Name = "custom_instance"
+    }
+
+
+    provisioner "local-exec" {
+        command = "echo ${self.private_ip} >> my_private_ips.txt"
+    }
+}
+
+output "public_ip_for_me" {
+    value = aws_instance.MyFirstInstance.public_ip
+}
