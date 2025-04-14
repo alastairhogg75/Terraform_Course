@@ -1,6 +1,6 @@
 variable "AWS_ACCESS_KEY" {}
 
-variable "AWS_SECRET_KEY" {}
+variable "AWS_SECRET_KEY" {test}
 
 variable "AWS_REGION" {
 default = "us-east-2"
@@ -16,11 +16,12 @@ variable "aws_s3_endpoint" {
   description = "AWS endpoint for LocalStack"
 }
 
+/*
 variable "aws_rds_endpoint" {
     type = string
   description = "AWS endpoint for LocalStack"
 }
-
+*/
 variable "AMIS" {
   type = map
   default = {
