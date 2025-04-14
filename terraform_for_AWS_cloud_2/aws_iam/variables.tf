@@ -1,6 +1,8 @@
 variable "AWS_ACCESS_KEY" {}
 
-variable "AWS_SECRET_KEY" {test}
+variable "AWS_SECRET_KEY" {
+default = "test"
+}
 
 variable "AWS_REGION" {
 default = "us-east-2"
