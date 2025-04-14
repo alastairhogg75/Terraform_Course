@@ -15,7 +15,7 @@ resource "aws_iam_group" "admingroup" {
 }
 
 # Assign User to AWS Group
-resource "aws_iam_group_membership" "admin-User" {
+resource "aws_iam_group_membership" "admin-Users" {
     name = "admin-users"
     users = [
         aws_iam_user.adminuser1.name,
@@ -25,7 +25,7 @@ resource "aws_iam_group_membership" "admin-User" {
 }
 
 # Policy for AWS Group
-resource "aws_iam_policy_attachment" "admin-user-attach" {
+resource "aws_iam_policy_attachment" "admin-users-attach" {
     name        = "admin-users-attach"
     groups      = [aws_iam_group.admingroup.name]
     policy_arn  = "arn:aws:iam::aws:policy/AdministratorAccess"
