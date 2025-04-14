@@ -23,6 +23,7 @@ provider "aws" {
     ec2 = var.aws_endpoint
     s3  = var.aws_s3_endpoint
     rds = var.aws_endpoint
+    iam = var.aws_endpoint
 
     ##s3  = "http://s3.localhost.localstack.cloud:4566"
     ##sts = "http://localhost:4566"
